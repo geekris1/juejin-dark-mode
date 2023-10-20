@@ -20,8 +20,6 @@ import { getBodyThemeValue, observerBodyDataTheme, setBodyThemeDataDark } from '
       if (theme === 'light') {
         setBodyThemeDataDark()
       }
-
     })
   }
-
 })()

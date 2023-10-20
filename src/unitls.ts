@@ -9,7 +9,7 @@ export function setBodyThemeDataDark() {
 }
 
 export function observerBodyDataTheme(callback: (themeValue: ThemeValue) => void) {
-  const observer = new MutationObserver((mutationsList, observer) => {
+  const observer = new MutationObserver((mutationsList) => {
     for (const mutation of mutationsList) {
       console.log(mutation, 'mutation')
       if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
@@ -23,4 +23,20 @@ export function observerBodyDataTheme(callback: (themeValue: ThemeValue) => void
   });
   const observerElement = document.body;
   observer.observe(observerElement, { attributes: true });
+}
+
+type GeneratedStyleValue = Record<string, Record<string, string>>
+
+
+
+export function generatedStyle(value: GeneratedStyleValue): string {
+  let result: string = '';
+  Object.entries(value).forEach(([key, value]) => {
+    result += `${key} {`
+    Object.entries(value).forEach(([key, value], index, current) => {
+      result += `${key}:${value}${index + 1 === current.length ? "" : ";"}`
+    })
+    result += '};'
+  })
+  return result
 }
