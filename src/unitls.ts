@@ -26,9 +26,6 @@ export function observerBodyDataTheme(callback: (themeValue: ThemeValue) => void
 }
 
 type GeneratedStyleValue = Record<string, Record<string, string>>
-
-
-
 export function generatedStyle(value: GeneratedStyleValue): string {
   let result: string = '';
   Object.entries(value).forEach(([key, value]) => {
@@ -39,4 +36,14 @@ export function generatedStyle(value: GeneratedStyleValue): string {
     result += '};'
   })
   return result
+}
+
+
+export function darkLogoReplace() {
+  const logoImg = document.querySelector<HTMLImageElement>('.logo-img')
+  if (logoImg) {
+    logoImg.src = '//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/17d2678259b01bde1db1825a3307e5d2.svg'
+  }
+
+
 }

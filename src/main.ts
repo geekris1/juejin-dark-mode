@@ -1,5 +1,7 @@
+import { GM_addStyle } from '$';
+import { backgroundColor } from './constants';
 import './style.css';
-import { getBodyThemeValue, observerBodyDataTheme, setBodyThemeDataDark } from './unitls';
+import { darkLogoReplace, generatedStyle, getBodyThemeValue, observerBodyDataTheme, setBodyThemeDataDark } from './unitls';
 
 
 (() => {
@@ -14,12 +16,23 @@ import { getBodyThemeValue, observerBodyDataTheme, setBodyThemeDataDark } from '
   if (themeConfig.theme === 'dark') {
     if (getBodyThemeValue() === 'light') {
       setBodyThemeDataDark()
+      darkLogoReplace()
     }
 
     observerBodyDataTheme((theme) => {
       if (theme === 'light') {
         setBodyThemeDataDark()
+        darkLogoReplace()
       }
     })
+
+    // https://juejin.cn/user
+    GM_addStyle(
+      generatedStyle({
+        '.user-info-block': {
+          ...backgroundColor
+        }
+      })
+    )
   }
 })()
